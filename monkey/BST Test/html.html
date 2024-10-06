@@ -1,0 +1,29 @@
+<tr>
+    <!-- BMI -->
+    <td class="report-item">{{ __('body_data_report.bmi') }}</td>
+    <td style="{{ getResultColor('bmi', $result, $result_prev) }}">{{ $result['bmi'] }} {{ getResultArrow('bmi', $result, $result_prev) }}</td>
+    <td class="report-desc">
+        <div class="flex-container">
+            @foreach(range(0, 4) as $i)
+                <div class="flex-item">
+                    @if ($i > 0 && $i < 4)
+                        {{ $result['bmiRange'][$i] ?? '' }}
+                    @endif
+                </div>
+            @endforeach
+        </div>
+
+        <img style="display: block;" width="500px" src="{{ $bmi_img64 }}">
+
+        <div class="flex-container">
+            <div class="flex-item">{{ __('body_data_report.thin') }}</div>
+            <div class="flex-item">{{ __('body_data_report.healthy') }}</div>
+            <div class="flex-item">{{ __('body_data_report.slightly_fat') }}</div>
+            <div class="flex-item">{{ __('body_data_report.obesity') }}</div>
+        </div>
+
+        <span class="report-desc-text">
+            {{ __('body_data_report.bmi_level_' . getLevel($result['bmi'], $result['bmiRange'])) }}
+        </span>
+    </td>
+</tr>
